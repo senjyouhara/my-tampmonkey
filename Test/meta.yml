@@ -1,0 +1,10 @@
+name: Test
+namespace: blog.test.com
+description: 测试
+author: ayano
+include:
+  - 'http://blog.csdn.net/*/article/details/*'
+#grant:
+#  - GM_addStyle
+#  - GM_setValue
+#  - GM_getValue
