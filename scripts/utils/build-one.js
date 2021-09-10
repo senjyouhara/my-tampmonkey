@@ -27,7 +27,7 @@ module.exports = function(name, output, isDev = false) {
     const webpackConfig = config({
       name,
       meta: meta.text,
-      output: outputDir,
+      output: path.join(outputDir, 'build'),
       isDev
     });
 
@@ -36,7 +36,7 @@ module.exports = function(name, output, isDev = false) {
     }
 
     const complier = webpack(webpackConfig);
-  
+
     complier.run((err, stats) => {
       if (err) {
         reject(err);

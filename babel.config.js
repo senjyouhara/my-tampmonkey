@@ -12,6 +12,7 @@ module.exports = {
     },
   ],
   plugins: [
+    "babel-plugin-classname-transform",
     ["@babel/plugin-proposal-optional-chaining", { loose: false }],
     ["@babel/plugin-proposal-decorators", { legacy: true }],
     ["@babel/plugin-proposal-class-properties", { loose: true }],

@@ -24,15 +24,18 @@ module.exports = function (options) {
     },
     {
       loader: "css-loader",
-      options: {
-        importLoaders: 1,
-        sourceMap: true,
-        modules: true,
-      },
     },
   ].filter(Boolean);
 
   const lessLoader = [...cssLoader];
+  lessLoader.pop()
+
+  lessLoader.push({
+    loader: "css-loader",
+    options: {
+      modules: true,
+    },
+  },);
   lessLoader.push({
     loader: "less-loader",
   });

@@ -1,0 +1,10 @@
+name: mkblog_auto
+namespace: lab.mkblog.cn
+description: mkblog小游戏在线自动操作面板
+author: ayano
+include:
+  - 'http://lab.mkblog.cn/adarkroom/'
+grant:
+  - GM_addStyle
+  - GM_setValue
+  - GM_getValue

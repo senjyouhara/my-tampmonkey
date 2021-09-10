@@ -1,0 +1,7 @@
+{
+  "name": "mkblog-auto-operator",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "ayano",
+  "license": "MIT"
+}
