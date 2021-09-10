@@ -9,7 +9,6 @@ export default function Menus(props) {
     wood: false,
     trap: false,
   });
-
   const timer = useMemo(() => {
     return {
       firewood: null,
@@ -38,7 +37,9 @@ export default function Menus(props) {
 
   function itemHandler(key) {
     const item = data[key];
+    clearInterval(timer[key]);
     timer[key] = setInterval(() => {
+      console.log(state, "state");
       if (!state[key]) {
         clearInterval(timer[key]);
       }
@@ -56,15 +57,17 @@ export default function Menus(props) {
       {Object.keys(data).map((v) => {
         return (
           <div key={data[v].id} className={s.menu}>
-            <span className={s.menuTitle}>
-              {data[v].title}
-            </span>
+            <span className={s.menuTitle}>{data[v].title}</span>
             <Switch
               checkedChildren="启用"
               unCheckedChildren="禁用"
               onChange={(e) => {
-                setState({ ...state, [v]: e });
-                itemHandler(v);
+                const data = { ...state };
+                data[v] = e;
+                setState(data);
+                setTimeout(() => {
+                  itemHandler(v);
+                });
               }}
               checked={state[v]}
             />
