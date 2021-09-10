@@ -39,7 +39,6 @@ export default function Menus(props) {
     const item = data[key];
     clearInterval(timer[key]);
     timer[key] = setInterval(() => {
-      console.log(state, "state");
       if (!state[key]) {
         clearInterval(timer[key]);
       }
