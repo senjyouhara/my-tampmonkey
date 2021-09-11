@@ -31,3 +31,9 @@ import s from './index.less';
 const button = document.createElement('button');
 button.className = s.myButton;
 ```
+
+### 使用方式
+
+`yarn install`
+
+`yarn dev demo`
