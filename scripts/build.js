@@ -4,7 +4,7 @@ const terminal = require("./utils/terminal");
 const isDev = process.argv.includes("-D");
 const name = process.argv[process.argv.length - 1];
 
-build(name, undefined, isDev)
+build(name, false)
   .then((res) => {
     terminal.assets(res.stats.compilation.assets);
   })

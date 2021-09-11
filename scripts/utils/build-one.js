@@ -1,40 +1,13 @@
 const webpack = require('webpack');
-const config = require('./webpack.config');
-const generateMeta = require('./generate-meta');
 const { readFileSync, existsSync } = require('fs');
 const path = require('path');
-const { exec } = require('./index');
+const { exec } = require('./childProcess');
+const { webpackConfigHandler } = require('../config/config')
 
-module.exports = function(name, output, isDev = false) {
+module.exports = function(name) {
   return new Promise(async (resolve, reject) => {
-    const root = path.resolve(__dirname, '../..', name);
 
-    // 检查有没有安装依赖
-    if (!existsSync(path.resolve(root, 'node_modules'))) {
-      await exec("cd " + root + " && yarn install --frozen-lockfile");
-    }
-
-    const outputDir = output || root;
-    // 读取版本号
-    const package = JSON.parse(readFileSync(path.resolve(root, 'package.json')));
-    // 读取配置，生成注释
-    const meta = generateMeta(path.resolve(root, 'meta.yml'), {
-      version: package.version,
-      updateURL: `https://userscript.firefoxcn.net/js/${name}.meta.js`,
-      downloadURL: `https://userscript.firefoxcn.net/js/${name}.user.js`
-    });
-
-    const webpackConfig = config({
-      name,
-      meta: meta.text,
-      output: path.join(outputDir, 'build'),
-      isDev
-    });
-
-    if (existsSync(path.resolve(root, 'webpack.overwrite.js'))) {
-      require(path.resolve(root, 'webpack.overwrite.js'))(webpackConfig);
-    }
-
+    const webpackConfig = webpackConfigHandler()
     const complier = webpack(webpackConfig);
 
     complier.run((err, stats) => {
@@ -49,7 +22,7 @@ module.exports = function(name, output, isDev = false) {
           return;
         }
       }
-      resolve({ name, meta, stats });
+      resolve({ name, stats });
     });
   });
 }

@@ -1,0 +1,10 @@
+{
+    "name": "test",
+    "version": "0.0.1",
+    "main": "index.js",
+    "author": "ayano",
+    "license": "MIT",
+    "dependencies": {
+        "babel-plugin-classname-transform": "0.0.1"
+    }
+}

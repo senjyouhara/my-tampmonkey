@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": [
-      "dom",
-      "es2017"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmit": false,
-    "preserveConstEnums": true,
-    "removeComments": false,
-    "skipLibCheck": true,
-    "sourceMap": false,
-    "strict": true,
     "target": "esnext",
-    "declaration": false,
-    "resolveJsonModule": true,
-    "jsx": "preserve"
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"],
+      "@packages": ["packages/*"]
+    }
   },
-  "exclude": [
-    "./scripts"
-  ]
+  "include": ["./typings.d.ts", "packages/**/*.tsx", "packages/**/*.ts"],
+  "exclude": ["node_modules", "lib", "es", "dist", "typings"]
 }

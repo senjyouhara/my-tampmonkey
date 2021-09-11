@@ -3,22 +3,23 @@ const TerserPlugin = require("terser-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const { writeFileSync } = require("fs");
+const fs = require('fs-extra')
 
 module.exports = function (options) {
-  const { isDev, name, meta, output } = options;
-  const root = path.resolve(__dirname, "../..", name);
+  const { isDev, name, meta, output, packageDir, root } = options;
   const minimizer = [
-    new webpack.BannerPlugin({
+      meta && new webpack.BannerPlugin({
       banner: meta,
       raw: true,
     }),
-  ];
+  ].filter(Boolean);
+
   if (!isDev) {
     minimizer.unshift(new TerserPlugin());
   }
+
   const cssLoader = [
-    !isDev && "gm-style-loader",
+    !isDev && {loader: "gm-style-loader"},
     isDev && {
       loader: "style-loader",
     },
@@ -54,21 +55,21 @@ module.exports = function (options) {
   };
   return {
     devtool: "source-map",
-    context: root,
+    context: packageDir,
     entry: {
-      [name + ".user"]: path.resolve(root, "src/index"),
+      [name]: path.resolve(packageDir, "src/index"),
     },
     mode: isDev ? "development" : "production",
     module: {
       rules: [
         {
           test: /\.jsx?$/,
-          include: path.resolve(root, "src"),
+          include: path.resolve(packageDir, "src"),
           use: babelLoader,
         },
         {
           test: /\.tsx?$/,
-          include: path.resolve(root, "src"),
+          include: path.resolve(packageDir, "src"),
           use: [babelLoader],
         },
         {
@@ -89,18 +90,18 @@ module.exports = function (options) {
       path: output,
     },
     plugins: [
-      new HtmlWebpackPlugin({
+        isDev && new HtmlWebpackPlugin({
         title: "title",
         inject: true,
-        template: path.join(__dirname, "../public/index.html"),
+        template: path.resolve(root, "public/index.html"),
       }),
       new ProgressBarPlugin({
         summary: false,
       }),
-      {
+     !isDev && meta && {
         apply: (compiler) => {
           compiler.hooks.afterEmit.tap("Generate meta.js", () => {
-            writeFileSync(
+            fs.writeFileSync(
               path.resolve(output, name + ".meta.js"),
               meta.trim(),
               {
@@ -108,9 +109,23 @@ module.exports = function (options) {
               },
             );
           });
+
         },
       },
-    ],
+     !isDev && {
+        apply: (compiler) => {
+          compiler.hooks.afterEmit.tap("myCustom", () => {
+              try {
+                  fs.copySync(output, path.resolve(root, 'build', name))
+                  console.log('success!')
+              } catch (err) {
+                  console.error(err)
+              }
+          });
+
+        },
+      },
+    ].filter(Boolean),
     optimization: {
       minimize: !isDev,
       minimizer: minimizer,
