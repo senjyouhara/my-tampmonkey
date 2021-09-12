@@ -58,7 +58,6 @@ module.exports = function (options) {
     };
     return {
         devtool: "source-map",
-        context: packageDir,
         entry: {
             [name]: path.resolve(packageDir, "src/index"),
         },
@@ -120,6 +119,7 @@ module.exports = function (options) {
                 apply: (compiler) => {
                     compiler.hooks.afterEmit.tap("myCustom", () => {
                         try {
+                          console.log(output, 'output')
                             fs.copySync(output, path.resolve(root, 'build', name))
                             console.log('success!')
                         } catch (err) {

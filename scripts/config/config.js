@@ -7,23 +7,39 @@ function checkBuildDir(buildDir) {
     const rootStat = fs.existsSync(buildDir);
     !rootStat && fs.mkdirSync(buildDir)
 }
+const pathSplit = process.cwd().split(path.sep)
+const cwd = process.cwd()
 
-const name = process.argv[process.argv.length - 1];
-const PACKAGES_PATH = path.resolve(__dirname, '../../', 'packages');
-const root = path.resolve(PACKAGES_PATH, '../')
+let name = process.argv[process.argv.length - 1];
+let PACKAGES_PATH = path.resolve(__dirname, '../../', 'packages');
+
+const isRootDir = fs.existsSync(path.resolve(process.cwd(), 'packages'))
+
+  // 子包目录
+if(!isRootDir){
+  name = pathSplit[pathSplit.length - 1]
+  PACKAGES_PATH = path.resolve(cwd, '../')
+}
+
+let root = path.resolve(PACKAGES_PATH, '../')
 const buildDir = path.resolve(root, 'build')
+
 const packages = fs.readdirSync(PACKAGES_PATH).filter(item => !item.startsWith('.'));
 
 function beforeCheck() {
-    const packageDir = name ? path.resolve(PACKAGES_PATH, name) : path.resolve(__dirname, "../../")
-    const packageBuild = path.resolve(packageDir, "build")
 
+  let packageDir = path.resolve(__dirname, "../../")
+
+  if(!isRootDir){
+    packageDir = cwd
+  }
+
+  const packageBuild = path.resolve(packageDir, "build")
+  fs.removeSync(packageBuild)
+  checkBuildDir(packageBuild)
+
+    fs.removeSync(path.resolve(buildDir, name))
     checkBuildDir(buildDir)
-    name && fs.removeSync(path.resolve(buildDir, name))
-
-    fs.removeSync(packageBuild)
-    checkBuildDir(packageBuild)
-
 
     return {
         packageDir,
@@ -51,8 +67,6 @@ function webpackConfigHandler(isDev) {
             downloadURL: `https://userscript.firefoxcn.net/js/${name}.user.js`
         });
     }
-
-
 
     const c = config({
         root,

@@ -14,7 +14,7 @@ const main = async function () {
         hot: true,
         overlay: true,
         host: "0.0.0.0",
-        port: 9000,
+        port: process.env.PORT || 9000,
         publicPath: "/",
         disableHostCheck: true,
         contentBase: packageBuild()

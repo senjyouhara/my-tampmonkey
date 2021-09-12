@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "init": "rimraf node_modules && rimraf build  && rimraf packages/*/build && yarn install && npm run build:all",
-    "bootstrap": "npx lerna bootstrap",
-    "clean": "rimraf node_modules && npx lerna clean --yes",
+    "init": "rimraf node_modules && rimraf build  && rimraf packages/*/build && npm install && npm run bootstrap && npm run build:all",
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna clean --yes",
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
     "build:all": "rimraf packages/*/build && rimraf build && node scripts/build-all.js",
@@ -15,9 +15,6 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "workspaces": [
-    "packages/*"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
