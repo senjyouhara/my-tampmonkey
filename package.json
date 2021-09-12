@@ -5,7 +5,9 @@
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "dev": "lerna run dev",
+    "dev:scope": "lerna run dev --scope",
     "build": "lerna run build",
+    "build:scope": "lerna run build --scope",
     "version": "lerna ls",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "lint-staged": "lint-staged"
