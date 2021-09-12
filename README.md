@@ -8,10 +8,9 @@
 * 新建入口文件，在其中编写脚本代码。
   * 如果你想要使用TypeScript，则新建`src/index.ts`。
   * 如果你想要使用普通JS，则新建`src/index.js`。
-* 编写过程中，运行`npm run dev 你的目录名称`，例如`npm run dev demo`，即可启动自动编译，在你的目录下生成脚本代码，并会随着你的修改自动重新编译。
-* 编写完成后，运行编译命令，即可在你的目录下生成脚本代码。
-* 打包编译，请运行`npm run build 你的目录名称`，例如`npm run build demo`
-* 如果对packages全部进行打包 请运行`npm run build:all`
+* 编写过程中，在你所在的packages子目录运行`npm run dev`，即可启动服务。
+* 打包编译，在你所在的packages子目录运行`npm run build`。
+* 如果对packages全部进行打包 请在根目录运行`npm run build`
 * 编译后的文件不仅在你的目录下生成也会在root目录下的build文件夹里生成
 
 ### 使用样式
@@ -34,6 +33,6 @@ button.className = s.myButton;
 
 ### 使用方式
 
-`yarn install`
+`npm i`
 
-`yarn dev demo`
+`npm run bootstrap`

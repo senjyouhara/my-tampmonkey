@@ -44,6 +44,5 @@ build(name)
     } else {
       console.error(err);
     }
-    // shell.exec(`cd ../../`)
     process.exit(1);
   });

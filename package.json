@@ -4,10 +4,8 @@
     "init": "rimraf node_modules && rimraf build  && rimraf packages/*/build && npm install && npm run bootstrap && npm run build:all",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
-    "dev": "node scripts/dev.js",
-    "build": "node scripts/build.js",
-    "build:all": "rimraf packages/*/build && rimraf build && node scripts/build-all.js",
-    "linkAll": "node scripts/link-all.js",
+    "dev": "lerna run dev",
+    "build": "lerna run build",
     "version": "lerna ls",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "lint-staged": "lint-staged"

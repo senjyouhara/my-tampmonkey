@@ -17,13 +17,14 @@ function babelPlugin({ types: t }) {
       JSXAttribute(path, state) {
         let { node } = path;
         const propertyName = state.propertyName;
-        if (node.name.type === "JSXIdentifier" && node.name.name === "className") {
+        if (
+          node.name.type === "JSXIdentifier" &&
+          node.name.name === "className"
+        ) {
           if (
             node.value.type === "JSXExpressionContainer" &&
             node.value.expression.type === "MemberExpression"
           ) {
-
-
             const value = node.value;
             const expression = node.value.expression;
             const expressionObject = expression.object;
@@ -42,7 +43,7 @@ function babelPlugin({ types: t }) {
                   p,
                 ),
               ),
-              member
+              member,
             );
 
             const newContainer = t.jsxExpressionContainer(logicalExpression);
@@ -50,6 +51,7 @@ function babelPlugin({ types: t }) {
               t.jsxIdentifier("className"),
               newContainer,
             );
+
             path.replaceWith(newJsx);
           }
         }

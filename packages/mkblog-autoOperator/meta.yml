@@ -6,5 +6,5 @@ include:
   - 'http://lab.mkblog.cn/adarkroom/'
 grant:
   - GM_addStyle
-  - GM_setValue
-  - GM_getValue
+#  - GM_setValue
+#  - GM_getValue
