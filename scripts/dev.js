@@ -3,7 +3,7 @@ const WebpackDevServer = require("webpack-dev-server")
 const path = require('path');
 const {exec} = require('./utils/childProcess');
 const terminal = require('./utils/terminal');
-const { webpackConfigHandler,packageBuild } = require('./config/config')
+const {webpackConfigHandler, packageBuild} = require('./config/config')
 
 const main = async function () {
 
@@ -18,7 +18,7 @@ const main = async function () {
         publicPath: "/",
         disableHostCheck: true,
         contentBase: packageBuild()
-}
+    }
 
     const webpackConfig = webpackConfigHandler(true);
 

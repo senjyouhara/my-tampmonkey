@@ -9,5 +9,5 @@ es
 .umi
 .github
 scripts
-webpack.config.js
+base.config.js
 jest.config.js

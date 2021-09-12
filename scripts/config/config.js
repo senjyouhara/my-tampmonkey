@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra')
-const config = require('./webpack.config');
+const config = require('./base.config');
 const generateMeta = require('../utils/generate-meta');
 
 function checkBuildDir(buildDir) {
@@ -15,11 +15,11 @@ const buildDir = path.resolve(root, 'build')
 const packages = fs.readdirSync(PACKAGES_PATH).filter(item => !item.startsWith('.'));
 
 function beforeCheck() {
-    const packageDir = path.resolve(PACKAGES_PATH, name);
+    const packageDir = name ? path.resolve(PACKAGES_PATH, name) : path.resolve(__dirname, "../../")
     const packageBuild = path.resolve(packageDir, "build")
 
     checkBuildDir(buildDir)
-    fs.removeSync(path.resolve(buildDir, name))
+    name && fs.removeSync(path.resolve(buildDir, name))
 
     fs.removeSync(packageBuild)
     checkBuildDir(packageBuild)

@@ -1,6 +1,9 @@
 const terminal = require("./utils/terminal");
-const { webpackConfigHandler } = require('../config/config')
+const { webpackConfigHandler } = require('./config/config')
 const webpack = require('webpack');
+const shell = require('shelljs');
+const path = require('path');
+const {exec} = require('child_process');
 
 const name = process.argv[process.argv.length - 1];
 
@@ -28,6 +31,7 @@ function build(name) {
     });
 }
 
+
 build(name)
   .then((res) => {
     terminal.assets(res.stats.compilation.assets);
@@ -40,5 +44,6 @@ build(name)
     } else {
       console.error(err);
     }
+    // shell.exec(`cd ../../`)
     process.exit(1);
   });
