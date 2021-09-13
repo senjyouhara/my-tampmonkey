@@ -12,7 +12,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: "17.2",
+      version: "17.0",
     },
   },
   // 自定义全局变量
@@ -20,24 +20,19 @@ module.exports = {
     _: true,
   },
   // 扩展插件
-  // extends: ["plugin:vue/essential", "plugin:prettier/recommended"],
   extends: ["plugin:react/recommended", "plugin:prettier/recommended"],
   plugins: ["react", "prettier"],
   parser: "babel-eslint",
-  // plugins: ["vue","prettier"],
   // JavaScript 语言选项
   parserOptions: {
-    // ECMAScript 版本
-    ecmaVersion: 2018,
-    sourceType: "module", //module
-    // 想使用的额外的语言特性:
+    ecmaVersion: 2020,
+    sourceType: "module",
     ecmaFeatures: {
-      // 允许在全局作用域下使用 return 语句
-      globalReturn: true,
-      // 严格模式
-      impliedStrict: true,
-      // 启用 JSX
       jsx: true,
+      impliedStrict: true,
+      globalReturn: false,
+      experimentalObjectRestSpread: true,
+      legacyDecorators: true,
     },
   },
   /**
@@ -50,7 +45,8 @@ module.exports = {
     ////////////////
     // 可能的错误 //
     ////////////////
-
+    "no-unsafe-optional-chaining": 0,
+    "react-hooks/exhaustive-deps": 0,
     // 禁止条件表达式中出现赋值操作符
     "no-cond-assign": 2,
     // 禁用 console
@@ -64,7 +60,7 @@ module.exports = {
     "no-control-regex": 2,
     // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
     // always-multiline：多行模式必须带逗号，单行模式不能带逗号
-    "comma-dangle": [1, "always-multiline"],
+    "comma-dangle": [0, "never"],
     // 禁用 debugger
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     // 禁止 function 定义中出现重名参数
@@ -84,7 +80,7 @@ module.exports = {
     // 禁止不必要的括号 //(a * b) + c;//报错
     "no-extra-parens": 0,
     // 禁止不必要的分号
-    "no-extra-semi": 2,
+    "no-extra-semi": 0,
     // 禁止对 function 声明重新赋值
     "no-func-assign": 2,
     // 禁止在嵌套的块中出现 function 或 var 声明
@@ -136,7 +132,7 @@ module.exports = {
     // 要求 return 语句要么总是指定返回的值，要么不指定
     "consistent-return": 0,
     // 强制所有控制语句使用一致的括号风格
-    curly: [2, "all"],
+    curly: [0, "all"],
     // switch 语句强制 default 分支，也可添加 // no default 注释取消此次警告
     "default-case": 2,
     // 强制object.key 中 . 的位置，参数:
@@ -318,9 +314,9 @@ module.exports = {
     //在JSX中强制布尔属性符号
     "react/jsx-boolean-value": 0,
     //在JSX中验证右括号位置
-    "react/jsx-closing-bracket-location": 1,
+    "react/jsx-closing-bracket-location": 0,
     //在JSX属性和表达式中加强或禁止大括号内的空格。
-    "react/jsx-curly-spacing": [2, { when: "never", children: true }],
+    "react/jsx-curly-spacing": 2,
     //验证JSX中的props缩进
     "react/jsx-indent-props": [0, 4],
     //在数组或迭代器中验证JSX具有key属性
@@ -358,7 +354,7 @@ module.exports = {
     //防止在React组件定义中丢失props验证
     "react/prop-types": 0,
     //使用JSX时防止丢失React
-    "react/react-in-jsx-scope": 2,
+    "react/react-in-jsx-scope": 0,
     //防止没有children的组件的额外结束标签
     "react/self-closing-comp": 0,
 
@@ -436,7 +432,7 @@ module.exports = {
     // // 强制在关键字前后使用一致的空格 (前后腰需要)
     //   "keyword-spacing":2,
     // 强制一行的最大长度
-    "max-len": [1, 600],
+    "max-len": [1, 1000],
     // 强制最大行数
     "max-lines": 0,
     // 强制 function 定义中最多允许的参数数量
@@ -546,7 +542,7 @@ module.exports = {
     //   "arrow-body-style":2,
     // 要求箭头函数的参数使用圆括号
     //   "arrow-parens":2,
-    "arrow-spacing": [2, { before: true, after: true }],
+    "arrow-spacing": [0, { before: true, after: true }],
     // 强制在子类构造函数中用super()调用父类构造函数，TypeScrip的编译器也会提示
     "constructor-super": 0,
     // 强制 generator 函数中 * 号周围使用一致的空格
@@ -592,7 +588,7 @@ module.exports = {
     // 强制模块内的 import 排序
     "sort-imports": 0,
     // 要求或禁止模板字符串中的嵌入表达式周围空格的使用
-    "template-curly-spacing": 1,
+    "template-curly-spacing": 0,
     // 强制在 yield* 表达式中 * 周围使用空格
     "yield-star-spacing": 2,
   },

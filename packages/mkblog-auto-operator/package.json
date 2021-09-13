@@ -5,7 +5,7 @@
     "author": "ayano",
     "license": "MIT",
   "scripts": {
-    "dev": "set PORT=3000 && node ../../scripts/dev.js",
+    "dev": "set PORT=3100 && node ../../scripts/dev.js",
     "build": "node ../../scripts/build.js"
   },
   "dependencies": {

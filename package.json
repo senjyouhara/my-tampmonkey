@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "init": "rimraf node_modules && rimraf build  && rimraf packages/*/build && npm install && npm run bootstrap && npm run build:all",
+    "init": "npm install && npm run bootstrap",
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean --yes",
     "dev": "lerna run dev",
@@ -40,7 +40,8 @@
     "@types/greasemonkey": "^4.0.0",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.0.14",
-    "@types/react": "^17.0.2",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
     "antd": "^4.15.1",
     "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",

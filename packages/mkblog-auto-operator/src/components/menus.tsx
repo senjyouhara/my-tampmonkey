@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import s from "./index.less";
+import s from './index.less';
 import { Switch } from "antd";
 import "antd/es/switch/style/index.css";
 
@@ -15,7 +15,7 @@ export default function Menus(props) {
       wood: null,
       trap: null,
     };
-  });
+  }, []);
 
   const data = {
     firewood: {
@@ -37,7 +37,9 @@ export default function Menus(props) {
 
   function itemHandler(key) {
     const item = data[key];
-    clearInterval(timer[key]);
+    if (!state[key]) {
+      clearInterval(timer[key]);
+    }
     timer[key] = setInterval(() => {
       if (!state[key]) {
         clearInterval(timer[key]);
